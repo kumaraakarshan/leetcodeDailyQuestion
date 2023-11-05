@@ -1,0 +1,15 @@
+ d = collections.defaultdict(list) 
+        for a, b in edges:
+            d[a].append(b)
+            d[b].append(a)
+
+        def dfs(node, parent):
+            tmp = 0
+            for v in d[node]:
+                if v != parent:
+                    tmp += dfs(v, node)
+            if tmp != 0:
+                return min(values[node], tmp)
+            return values[node]
+            
+        return sum(values) - dfs(0, -1)
