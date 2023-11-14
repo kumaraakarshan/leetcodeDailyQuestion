@@ -1,0 +1,21 @@
+class Solution:
+    def countPalindromicSubsequence(self, s: str) -> int:
+        def get_count(i,j):
+            h = set()
+            count = 0
+            for i in range(i+1,j):
+                if s[i] in h:
+                    continue
+                count+=1
+                h.add(s[i])
+            return count
+        final = 0
+        for letter in "abcdefghijklmnopqrstuvwxyz":
+            i = 0
+            j = len(s)-1
+            while i < len(s) and s[i] != letter:
+                i+=1
+            while j > -1 and s[j] != letter:
+                j-=1
+            final += get_count(i,j)
+        return final
